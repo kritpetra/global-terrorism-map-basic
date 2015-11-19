@@ -1,0 +1,17 @@
+{
+    "contents" : "\nmilitaryexpend <- c()\nmaxnumkill <- c()\n\nfor ( year in 1971:2013 ) {\n     for ( country in unique(regionData$Country) ) {\n     militaryexpend %<>% append(regionData$MilXpnd[regionData$Year == year+1 & regionData$Country == country])\n     maxnumkill  %<>% append(max(c(terrorismData$nkill[terrorismData$iyear == year & terrorismData$country_txt == country],0)))\n}\n}\n\nxyplot(log(militaryexpend+0.01)~log(maxnumkill+1))",
+    "created" : 1436387338886.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "3489229593",
+    "id" : "96665C01",
+    "lastKnownWriteTime" : 1436385142,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

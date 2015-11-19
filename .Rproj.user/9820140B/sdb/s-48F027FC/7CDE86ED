@@ -1,0 +1,22 @@
+{
+    "contents" : "",
+    "created" : 1436296988832.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "7CDE86ED",
+    "lastKnownWriteTime" : 463856468000,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "caption" : "regionData",
+        "contentUrl" : "content?title=regionData&file=41da33462e2641e3a69f09881b52dfee.htm",
+        "displayedObservations" : "1000",
+        "displayedVariables" : 28,
+        "totalObservations" : "7656",
+        "variables" : "27"
+    },
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}

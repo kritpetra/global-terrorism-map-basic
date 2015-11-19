@@ -1,0 +1,22 @@
+{
+    "contents" : "",
+    "created" : 1436292815532.000,
+    "dirty" : false,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "A74640C5",
+    "lastKnownWriteTime" : 3975882665876338997,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "caption" : "regionDatabackup",
+        "contentUrl" : "content?title=regionDatabackup&file=0baff80223674748b52d3a4a519e178a.htm",
+        "displayedObservations" : "1000",
+        "displayedVariables" : 27,
+        "totalObservations" : "7656",
+        "variables" : "27"
+    },
+    "source_on_save" : false,
+    "type" : "r_dataframe"
+}
