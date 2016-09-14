@@ -1,22 +1,24 @@
+# Code may need to be optimized -- is it possible to create the content in the
+# popups only when the user clicks on it?
+
+# Idea to improve performance:
+# http://stackoverflow.com/questions/29173336/how-to-display-advanced-customed-popups-for-leaflet-in-shiny
+
 if ( !require(shiny) ) install.packages('shiny')
 library('shiny')
 
 shinyServer(function(input, output) {
 
-     #Initialize Data
+     # Checks if data is already loaded, and initializes data with a progress bar otherwise
      if(!(exists('regionData') & exists('regionInfo'))) source("initialize.R")
 
      ##########################################################################
      ############################ Creating the Maps ###########################
      ##########################################################################
 
-     #    Main functions
+     # Main functions
 
      updateMarkers <- function(){
-
-         startTime <- Sys.time()
-
-         leafletProxy('Map') %>% clearMarkers()
 
          regionName <- regionInfo[input$region, ]$Name
 
@@ -27,35 +29,22 @@ shinyServer(function(input, output) {
 
          mapdata <- regionData[regionData$Year == input$year &
                             regionData$Country %in% mapshapes$admin,]
-#
-#          startTimePlotPoints <- Sys.time()
 
-             #         Checks if there are any events for that year and breaks if there aren't any
+             # Checks if there are any events for that year and breaks if there aren't any
              if(nrow(regionEvents) == 0) return()
 
-             #         Renders markers if there are
+             # Renders markers if there are
+			 leafletProxy('Map') %>% clearMarkers()
              leafletProxy('Map') %>% addCircleMarkers(
                  lng=regionEvents$longitude, lat=regionEvents$latitude,
                  color = "red", opacity = .2, weight = 7,
                  fillColor = "yellow", fillOpacity = .7,
                  radius = regionEvents$severity,
-                 popup=regionEvents$info
+                 popup = regionEvents$info
              )
-
-#          print(paste("Time to plot markers:", Sys.time()-startTimePlotPoints))
-
-         runTime <- Sys.time() - startTime
-
-         numIncidents <- length(regionEvents$iyear)
-#          print(paste("Number of incidents:", numIncidents))
-         print(paste("Time to update markers:", runTime))
-#          print(paste("Time per incident:", runTime/numIncidents))
 
      }
      updateRegion <- function(){
-
-         startTime <- Sys.time()
-
          region <- regionInfo[input$region,]
 
          regionName <- regionInfo[input$region, ]$Name
@@ -70,17 +59,13 @@ shinyServer(function(input, output) {
                  data = mapshapes, layerId = ~admin,
                  weight = 2, fillColor = "#12AFFF",
                  color = "black", fillOpacity = 0.3)
-
-         runTime <- Sys.time() - startTime
-         print(paste("Time to update region:", runTime))
      }
 
-     #    Create blank map
+     # Create blank map
      output$Map <- renderLeaflet({
          leaflet()  %>%
              addProviderTiles("CartoDB.Positron")
-         #                addTiles('http://services.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}.png')
-     })
+	})
 
      #    Updates polygons and markers whenever year changes
      observeEvent({input$year}, {
@@ -117,7 +102,7 @@ shinyServer(function(input, output) {
 
           <div style='padding:1em'>
                More resources for instructors: <a href=''>Stats2Labs</a>.
-</div>
+		  </div>
           "})
 
 })
